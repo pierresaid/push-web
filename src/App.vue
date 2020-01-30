@@ -1,8 +1,15 @@
 <template>
-  <v-app>
+  <v-app dark>
     <v-app-bar app color="primary" dark>
-      <v-btn to="/">
-        <span class="mr-2">Home</span>
+      <v-btn color="transparent" to="/" fab>
+        <v-img src="./assets/logo.png" width="50" />
+      </v-btn>
+      <v-spacer />
+      <v-btn to="signup" rounded color="light-blue" class="mr-2">
+        <span class="font-weight-bold"> Sign up</span>
+      </v-btn>
+      <v-btn to="login" rounded color="black">
+        Login
       </v-btn>
     </v-app-bar>
 

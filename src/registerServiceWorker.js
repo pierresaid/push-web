@@ -30,30 +30,30 @@ register(`${process.env.BASE_URL}service-worker.js`, {
       if (sub === null) {
         // Update UI to ask user to register for Push
         console.log("Not subscribed to push service!");
-        reg.pushManager
-          .subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array(
-              "BITe_5VTcVRQhsR2oj717J1phxL-wp83rp7xSFC2dlMj8hx7RkZKeTf8o-xLD21J46GbFobpkcl9sV3FRqI_F68"
-            )
-          })
-          .then(function(sub) {
-            console.log("Endpoint URL: ", JSON.stringify(sub));
-          })
-          .catch(function(e) {
-            if (Notification.permission === "denied") {
-              console.warn("Permission for notifications was denied");
-            } else {
-              console.error("Unable to subscribe to push", e);
-            }
-          });
+        // reg.pushManager
+        //   .subscribe({
+        //     userVisibleOnly: true,
+        //     applicationServerKey: urlBase64ToUint8Array(
+        //       "BITe_5VTcVRQhsR2oj717J1phxL-wp83rp7xSFC2dlMj8hx7RkZKeTf8o-xLD21J46GbFobpkcl9sV3FRqI_F68"
+        //     )
+        //   })
+        //   .then(function(sub) {
+        //     console.log("Endpoint URL: ", JSON.stringify(sub));
+        //   })
+        //   .catch(function(e) {
+        //     if (Notification.permission === "denied") {
+        //       console.warn("Permission for notifications was denied");
+        //     } else {
+        //       console.error("Unable to subscribe to push", e);
+        //     }
+        //   });
       } else {
         // We have a subscription, update the database
-        const sub_object = sub.toJSON();
-        console.log("Subscription object: ", sub_object);
-        Axios.post("http://localhost:63079/push", sub_object).then(res => {
-          console.log(res);
-        });
+        // const sub_object = sub.toJSON();
+        // console.log("Subscription object: ", sub_object);
+        // Axios.post("http://localhost:63079/push", sub_object).then(res => {
+        //   console.log(res);
+        // });
       }
     });
     console.log("Service worker has been registered.");
