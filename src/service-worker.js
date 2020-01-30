@@ -1,8 +1,7 @@
 self.addEventListener("push", function(e) {
-  console.log("Hi");
   const data = e.data.json();
   self.registration.showNotification(data.title, {
-    body: "Notified by me",
+    body: data.body,
     icon: "icon"
   });
 });

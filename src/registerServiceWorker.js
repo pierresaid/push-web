@@ -2,29 +2,8 @@
 
 import { register } from "register-service-worker";
 import Axios from "axios";
-// if (true) {
-// if (!process.env.NODE_ENV === "production") {
 
-// self.addEventListener("push", function(e) {
-//   var options = {
-//     body: "This notification was generated from a push!",
-//     icon: "images/example.png",
-//     vibrate: [100, 50, 100],
-//     data: {
-//       dateOfArrival: Date.now(),
-//       primaryKey: "2"
-//     },
-//     actions: [
-//       {
-//         action: "explore",
-//         title: "Explore this new world",
-//         icon: "images/checkmark.png"
-//       },
-//       { action: "close", title: "Close", icon: "images/xmark.png" }
-//     ]
-//   };
-//   e.waitUntil(self.registration.showNotification("Hello world!", options));
-// });
+// if (!process.env.NODE_ENV === "production") {
 
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -48,27 +27,34 @@ register(`${process.env.BASE_URL}service-worker.js`, {
   },
   registered(reg) {
     reg.pushManager.getSubscription().then(function(sub) {
-      reg.pushManager
-        .subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(
-            "BITe_5VTcVRQhsR2oj717J1phxL-wp83rp7xSFC2dlMj8hx7RkZKeTf8o-xLD21J46GbFobpkcl9sV3FRqI_F68"
-          )
-        })
-        .then(function(sub) {
-          const sub_object = sub.toJSON();
-          console.log("Subscription object: ", sub_object);
-          Axios.post("http://localhost:63079/push", sub_object).then(res => {
-            console.log(res);
+      if (sub === null) {
+        // Update UI to ask user to register for Push
+        console.log("Not subscribed to push service!");
+        reg.pushManager
+          .subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(
+              "BITe_5VTcVRQhsR2oj717J1phxL-wp83rp7xSFC2dlMj8hx7RkZKeTf8o-xLD21J46GbFobpkcl9sV3FRqI_F68"
+            )
+          })
+          .then(function(sub) {
+            console.log("Endpoint URL: ", JSON.stringify(sub));
+          })
+          .catch(function(e) {
+            if (Notification.permission === "denied") {
+              console.warn("Permission for notifications was denied");
+            } else {
+              console.error("Unable to subscribe to push", e);
+            }
           });
-        })
-        .catch(function(e) {
-          if (Notification.permission === "denied") {
-            console.warn("Permission for notifications was denied");
-          } else {
-            console.error("Unable to subscribe to push", e);
-          }
+      } else {
+        // We have a subscription, update the database
+        const sub_object = sub.toJSON();
+        console.log("Subscription object: ", sub_object);
+        Axios.post("http://localhost:63079/push", sub_object).then(res => {
+          console.log(res);
         });
+      }
     });
     console.log("Service worker has been registered.");
   },
@@ -90,16 +76,3 @@ register(`${process.env.BASE_URL}service-worker.js`, {
     console.error("Error during service worker registration:", error);
   }
 });
-// }
-
-// self.addEventListener("push", function(event) {
-//   if (event.data) {
-//     console.log("Push event!! ", event.data.text());
-//   } else {
-//     console.log("Push event but no data");
-//   }
-// });
-
-// Axios.get("http://localhost:63079/").then(res => {
-//   console.log(res);
-// });
