@@ -20,10 +20,16 @@
 </template>
 
 <script>
+// import { Axios } from "axios";
 export default {
   name: "App",
   components: {},
-  created() {},
+  created() {
+    // Axios.post("http://localhost:63079/push", {
+    //   endpoint: "",
+    //   keys: { auth: "", p256dh: "" }
+    // });
+  },
   methods: {}
 };
 </script>
