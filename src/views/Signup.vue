@@ -8,9 +8,9 @@
         <ValidationObserver v-slot="{ handleSubmit }">
           <form @submit.prevent="handleSubmit(onSubmit)">
             <ValidationProvider
+              v-slot="{ errors }"
               name="Name"
               rules="required|alpha|min:3|max:30"
-              v-slot="{ errors }"
             >
               <v-text-field
                 v-model="name"
@@ -22,9 +22,9 @@
               />
             </ValidationProvider>
             <ValidationProvider
+              v-slot="{ errors }"
               name="Email"
               rules="required|email|max:30"
-              v-slot="{ errors }"
             >
               <v-text-field
                 v-model="email"
@@ -37,9 +37,9 @@
               />
             </ValidationProvider>
             <ValidationProvider
+              v-slot="{ errors }"
               name="Password"
               rules="required|min:4|max:200"
-              v-slot="{ errors }"
             >
               <v-text-field
                 v-model="password"
