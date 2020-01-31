@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("sum");
+      // console.log("sum");
     }
   }
 };
