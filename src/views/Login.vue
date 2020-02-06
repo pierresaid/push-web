@@ -7,32 +7,20 @@
       <v-card-text>
         <ValidationObserver v-slot="{ handleSubmit }">
           <form @submit.prevent="handleSubmit(onSubmit)">
-            <ValidationProvider
-              v-slot="{ errors }"
+            <c-text-input
+              v-model="email"
               name="Email"
+              type="email"
               rules="required|email|max:30"
-            >
-              <v-text-field
-                v-model="email"
-                type="email"
-                label="Email"
-                :error-messages="errors"
-                prepend-icon="mail"
-              />
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
+              prepend-icon="mail"
+            />
+            <c-text-input
+              v-model="password"
+              type="password"
               name="Password"
               rules="required|min:4|max:200"
-            >
-              <v-text-field
-                v-model="password"
-                type="password"
-                label="Password"
-                :error-messages="errors"
-                prepend-icon="lock"
-              />
-            </ValidationProvider>
+              prepend-icon="lock"
+            />
             <v-card-actions>
               <v-btn type="submit" color="primary">Login</v-btn>
             </v-card-actions>
@@ -53,7 +41,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      // console.log("sum");
+      console.log("LOGIN");
     }
   }
 };

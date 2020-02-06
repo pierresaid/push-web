@@ -7,49 +7,27 @@
       <v-card-text>
         <ValidationObserver v-slot="{ handleSubmit }">
           <form @submit.prevent="handleSubmit(onSubmit)">
-            <ValidationProvider
-              v-slot="{ errors }"
-              name="Name"
-              rules="required|alpha|min:3|max:30"
-            >
-              <v-text-field
-                v-model="name"
-                type="text"
-                label="Name"
-                :error-messages="errors"
-                autocomplete="name"
-                prepend-icon="person"
-              />
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
+            <c-text-input
+              v-model="name"
               name="Email"
+              type="email"
               rules="required|email|max:30"
-            >
-              <v-text-field
-                v-model="email"
-                type="email"
-                label="Email"
-                :error-messages="errors"
-                autocomplete="email"
-                name="email "
-                prepend-icon="mail"
-              />
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
+              prepend-icon="mail"
+            /><c-text-input
+              v-model="email"
+              name="Name"
+              rules="required|min:3|max:30"
+              autocomplete="name"
+              prepend-icon="person"
+            />
+            <c-text-input
+              v-model="password"
+              type="password"
               name="Password"
               rules="required|min:4|max:200"
-            >
-              <v-text-field
-                v-model="password"
-                type="password"
-                label="Password"
-                :error-messages="errors"
-                autocomplete="new-password"
-                prepend-icon="lock"
-              />
-            </ValidationProvider>
+              autocomplete="new-password"
+              prepend-icon="lock"
+            />
             <v-card-actions>
               <v-btn type="submit" color="primary">Sign up</v-btn>
             </v-card-actions>
