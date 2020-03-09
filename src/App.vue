@@ -6,11 +6,9 @@
       </v-btn>
       <v-spacer />
       <v-btn to="signup" rounded color="light-blue" class="mr-2">
-        <span class="font-weight-bold"> Sign up</span>
+        <span class="font-weight-bold">Sign up</span>
       </v-btn>
-      <v-btn to="login" rounded color="black">
-        Login
-      </v-btn>
+      <v-btn to="login" rounded color="black">Login</v-btn>
     </v-app-bar>
 
     <v-content>
@@ -21,12 +19,6 @@
 
 <script>
 export default {
-  name: "App",
-  created() {
-    //   Axios.post("http://localhost:63079/push", {
-    //   endpoint: "",
-    //   keys: { auth: "", p256dh: "" }
-    // });
-  }
+  name: "App"
 };
 </script>

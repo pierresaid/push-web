@@ -5,7 +5,6 @@
       :label="name"
       :error-messages="errors"
       v-bind="$attrs"
-      @input="$emit('input', $event)"
       v-on="$listeners"
     />
   </ValidationProvider>

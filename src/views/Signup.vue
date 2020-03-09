@@ -5,34 +5,32 @@
         Signup
       </v-card-title>
       <v-card-text>
-        <ValidationObserver v-slot="{ handleSubmit }">
-          <form @submit.prevent="handleSubmit(onSubmit)">
-            <c-text-input
-              v-model="name"
-              name="Email"
-              type="email"
-              rules="required|email|max:30"
-              prepend-icon="mail"
-            /><c-text-input
-              v-model="email"
-              name="Name"
-              rules="required|min:3|max:30"
-              autocomplete="name"
-              prepend-icon="person"
-            />
-            <c-text-input
-              v-model="password"
-              type="password"
-              name="Password"
-              rules="required|min:4|max:200"
-              autocomplete="new-password"
-              prepend-icon="lock"
-            />
-            <v-card-actions>
-              <v-btn type="submit" color="primary">Sign up</v-btn>
-            </v-card-actions>
-          </form>
-        </ValidationObserver>
+        <c-form @submit="onSubmit">
+          <c-text-input
+            v-model="email"
+            name="Email"
+            type="email"
+            rules="required|email|max:30"
+            prepend-icon="mail"
+          /><c-text-input
+            v-model="name"
+            name="Name"
+            rules="required|min:3|max:30"
+            autocomplete="name"
+            prepend-icon="person"
+          />
+          <c-text-input
+            v-model="password"
+            type="password"
+            name="Password"
+            rules="required|min:4|max:200"
+            autocomplete="new-password"
+            prepend-icon="lock"
+          />
+          <v-card-actions>
+            <v-btn type="submit" color="primary">Sign up</v-btn>
+          </v-card-actions>
+        </c-form>
       </v-card-text>
     </v-card>
   </v-container>
