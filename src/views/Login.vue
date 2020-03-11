@@ -1,9 +1,7 @@
 <template>
   <v-container>
     <v-card class="mx-auto">
-      <v-card-title>
-        Login
-      </v-card-title>
+      <v-card-title>Login</v-card-title>
       <v-card-text>
         <ValidationObserver v-slot="{ handleSubmit }">
           <form @submit.prevent="handleSubmit(onSubmit)">
@@ -32,6 +30,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -40,8 +40,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions("user", ["login"]),
     onSubmit() {
-      console.log("LOGIN");
+      this.login();
     }
   }
 };
