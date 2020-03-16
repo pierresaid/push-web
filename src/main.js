@@ -6,6 +6,9 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import "./plugins/vee-validate";
 import "./plugins/custom-components";
+import Axios from "axios";
+
+Axios.defaults.baseURL = process.env.API_URL || "http://localhost:6000";
 
 Vue.config.productionTip = false;
 

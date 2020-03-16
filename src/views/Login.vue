@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-containe>
     <v-card class="mx-auto">
       <v-card-title>Login</v-card-title>
       <v-card-text>
@@ -9,14 +9,14 @@
               v-model="email"
               name="Email"
               type="email"
-              rules="required|email|max:30"
+              rules="required|email|max:50"
               prepend-icon="mail"
             />
             <c-text-input
               v-model="password"
               type="password"
               name="Password"
-              rules="required|min:4|max:200"
+              rules="required|min:6|max:50"
               prepend-icon="lock"
             />
             <v-card-actions>
@@ -26,7 +26,7 @@
         </ValidationObserver>
       </v-card-text>
     </v-card>
-  </v-container>
+  </v-containe>
 </template>
 
 <script>
@@ -40,9 +40,9 @@ export default {
     };
   },
   methods: {
-    ...mapActions("user", ["login"]),
+    ...mapActions("auth", ["login"]),
     onSubmit() {
-      this.login();
+      this.login({ email: this.email, password: this.password });
     }
   }
 };

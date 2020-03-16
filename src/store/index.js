@@ -3,23 +3,30 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-const req = require.context("@/store/", true, /\.(js)$/i);
+const modules = {};
 
-const moduleNames = req.keys().filter(key => {
-  return key !== "./index.js";
-});
+(function updateModules() {
+  const req = require.context("@/store/", true, /^((?!index.).)*\.js$/);
 
-let modulesArray = moduleNames.map(moduleName => {
-  return { [moduleName.match(/\w+/)[0]]: req(moduleName).default };
-});
+  req.keys().forEach(fileName => {
+    const moduleDefinition = req(fileName).default;
 
-const modules = modulesArray.reduce((m, modules) => {
-  return { ...m, ...modules };
-});
+    modules[fileName.match(/\w+/)[0]] = moduleDefinition;
 
-export default new Vuex.Store({
+    if (module.hot) {
+      module.hot.accept(req.id, () => {
+        updateModules();
+        store.hotUpdate({ modules });
+      });
+    }
+  });
+})();
+
+const store = new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
   modules
 });
+
+export default store;
