@@ -1,11 +1,23 @@
 <template>
-  <ValidationObserver v-slot="{ handleSubmit }">
+  <ValidationObserver v-slot="{ handleSubmit, invalid }">
     <form
       v-bind="$attrs"
-      @submit.prevent="handleSubmit($listeners.submit)"
       v-on="$listeners"
+      @submit.prevent="handleSubmit(onSubmit)"
     >
-      <slot />
+      <slot :invalid="invalid" />
     </form>
   </ValidationObserver>
 </template>
+
+<script>
+export default {
+  props: {
+    onSubmit: {
+      type: Function,
+      required: false,
+      default: () => {}
+    }
+  }
+};
+</script>

@@ -3,7 +3,7 @@
     <v-text-field
       :value="value"
       :label="name"
-      :error-messages="errors"
+      :error-messages="errorMessage ? [...errors, errorMessage] : errors"
       v-bind="$attrs"
       v-on="$listeners"
     />
@@ -12,8 +12,28 @@
 
 <script>
 export default {
-  props: ["value", "name", "rules"]
+  aprops: ["value", "name", "rules", "errorMessages"],
+  props: {
+    value: {
+      type: String,
+      required: false,
+      default: null
+    },
+    name: {
+      type: String,
+      required: false,
+      default: null
+    },
+    rules: {
+      type: String,
+      required: false,
+      default: null
+    },
+    errorMessage: {
+      type: String,
+      required: false,
+      default: null
+    }
+  }
 };
 </script>
-
-<style></style>
