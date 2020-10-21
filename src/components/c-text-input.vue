@@ -12,7 +12,6 @@
 
 <script>
 export default {
-  aprops: ["value", "name", "rules", "errorMessages"],
   props: {
     value: {
       type: String,
